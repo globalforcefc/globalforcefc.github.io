@@ -3,99 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - Global Force FC</title>
+    <title data-en="Gallery - Global Force FC" data-ne="ग्यालेरी - ग्लोबल फोर्स एफसी">Gallery - Global Force FC</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <base href="/globalforcefc.github.io/">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="logo">
                 <img src="assets/logo.png" alt="Global Force FC">
-                <span>GLOBAL FORCE FC</span>
+                <span data-en="GLOBAL FORCE FC" data-ne="ग्लोबल फोर्स एफसी">GLOBAL FORCE FC</span>
+            </div>
+            <div class="language-switcher">
+                <button id="langToggle" class="lang-btn">
+                    <span class="flag">🇳🇵</span>
+                    <span class="lang-text" data-en="नेपाली" data-ne="English">नेपाली</span>
+                </button>
             </div>
             <div class="nav-toggle" id="navToggle">
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="team.html">Teams</a></li>
-                <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="stats.html">Statistics</a></li>
-                <li><a href="membership.html">Membership</a></li>
-                <li><a href="gallery.html" class="active">Gallery</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" data-en="Home" data-ne="गृहपृष्ठ">Home</a></li>
+                <li><a href="about.html" data-en="About" data-ne="हाम्रो बारेमा">About</a></li>
+                <li><a href="team.html" data-en="Teams" data-ne="टोलीहरू">Teams</a></li>
+                <li><a href="schedule.html" data-en="Schedule" data-ne="तालिका">Schedule</a></li>
+                <li><a href="stats.html" data-en="Statistics" data-ne="तथ्यांक">Statistics</a></li>
+                <li><a href="membership.html" data-en="Membership" data-ne="सदस्यता">Membership</a></li>
+                <li><a href="gallery.html" class="active" data-en="Gallery" data-ne="ग्यालेरी">Gallery</a></li>
+                <li><a href="contact.html" data-en="Contact" data-ne="सम्पर्क">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="page-header">
         <div class="container">
-            <h1>Gallery</h1>
-            <p>Moments & Memories</p>
+            <h1 data-en="Gallery" data-ne="ग्यालेरी">Gallery</h1>
+            <p data-en="Moments & Memories" data-ne="क्षणहरू र सम्झनाहरू">Moments & Memories</p>
         </div>
     </section>
 
     <section class="gallery-section">
         <div class="container">
             <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="tournament">Tournaments</button>
-                <button class="filter-btn" data-filter="friendly">Friendlies</button>
-                <button class="filter-btn" data-filter="training">Training</button>
-                <button class="filter-btn" data-filter="events">Events</button>
+                <button class="filter-btn active" data-filter="all" data-en="All" data-ne="सबै">All</button>
+                <button class="filter-btn" data-filter="tournament" data-en="Tournaments" data-ne="प्रतियोगिताहरू">Tournaments</button>
+                <button class="filter-btn" data-filter="friendly" data-en="Friendlies" data-ne="मैत्रीपूर्ण खेलहरू">Friendlies</button>
+                <button class="filter-btn" data-filter="training" data-en="Training" data-ne="प्रशिक्षण">Training</button>
+                <button class="filter-btn" data-filter="events" data-en="Events" data-ne="कार्यक्रमहरू">Events</button>
             </div>
 
             <div class="gallery-grid">
-                <!-- EDIT: Replace with your actual photos -->
                 <div class="gallery-item tournament">
                     <div class="placeholder-img">
                         <i class="fas fa-image"></i>
-                        <span>Tournament Photo 1</span>
+                        <span data-en="Tournament Photo 1" data-ne="प्रतियोगिता फोटो १">Tournament Photo 1</span>
                     </div>
-                    <div class="gallery-caption">Tournament 2025</div>
+                    <div class="gallery-caption" data-en="Tournament 2025" data-ne="प्रतियोगिता २०२५">Tournament 2025</div>
                 </div>
                 <div class="gallery-item friendly">
                     <div class="placeholder-img">
                         <i class="fas fa-image"></i>
-                        <span>Friendly Match</span>
+                        <span data-en="Friendly Match" data-ne="मैत्रीपूर्ण खेल">Friendly Match</span>
                     </div>
-                    <div class="gallery-caption">vs Rivals FC</div>
+                    <div class="gallery-caption" data-en="vs Rivals FC" data-ne="बनाम प्रतिद्वन्द्वी एफसी">vs Rivals FC</div>
                 </div>
                 <div class="gallery-item training">
                     <div class="placeholder-img">
                         <i class="fas fa-image"></i>
-                        <span>Training Session</span>
+                        <span data-en="Training Session" data-ne="प्रशिक्षण सत्र">Training Session</span>
                     </div>
-                    <div class="gallery-caption">Friday Practice</div>
+                    <div class="gallery-caption" data-en="Friday Practice" data-ne="शुक्रबार अभ्यास">Friday Practice</div>
                 </div>
                 <div class="gallery-item events">
                     <div class="placeholder-img">
                         <i class="fas fa-image"></i>
-                        <span>Club Event</span>
+                        <span data-en="Club Event" data-ne="क्लब कार्यक्रम">Club Event</span>
                     </div>
-                    <div class="gallery-caption">Team Building</div>
-                </div>
-                <div class="gallery-item tournament">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span>Celebration</span>
-                    </div>
-                    <div class="gallery-caption">Winning Moment</div>
-                </div>
-                <div class="gallery-item training">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span>Equipment</span>
-                    </div>
-                    <div class="gallery-caption">Kelme Balls</div>
+                    <div class="gallery-caption" data-en="Team Building" data-ne="टोली निर्माण">Team Building</div>
                 </div>
             </div>
 
             <div class="social-gallery-note">
-                <h3>More Photos</h3>
-                <p>Follow us on social media for daily updates and photos:</p>
+                <h3 data-en="More Photos" data-ne="थप फोटोहरू">More Photos</h3>
+                <p data-en="Follow us on social media for daily updates and photos:" data-ne="दैनिक अद्यावधिक र फोटोहरूका लागि सामाजिक सञ्जालमा हामीलाई फलो गर्नुहोस्:">Follow us on social media for daily updates and photos:</p>
                 <div class="social-big">
                     <a href="https://facebook.com/YOUR_PAGE" target="_blank" class="social-btn facebook">
                         <i class="fab fa-facebook"></i> Facebook
@@ -112,8 +105,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Global Force FC</h3>
-                    <p>Strength in Unity<br>Established 2025</p>
+                    <h3 data-en="Global Force FC" data-ne="ग्लोबल फोर्स एफसी">Global Force FC</h3>
+                    <p><span data-en="Strength in Unity" data-ne="एकतामा शक्ति">Strength in Unity</span><br>2025</p>
                     <div class="social-links">
                         <a href="https://facebook.com/YOUR_PAGE" target="_blank"><i class="fab fa-facebook"></i></a>
                         <a href="https://tiktok.com/YOUR_ACCOUNT" target="_blank"><i class="fab fa-tiktok"></i></a>
@@ -121,27 +114,56 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h3 data-en="Quick Links" data-ne="द्रुत लिङ्कहरू">Quick Links</h3>
                     <ul>
-                        <li><a href="schedule.html">Fixtures</a></li>
-                        <li><a href="stats.html">Player Stats</a></li>
-                        <li><a href="membership.html">Join Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="schedule.html" data-en="Fixtures" data-ne="खेल तालिका">Fixtures</a></li>
+                        <li><a href="stats.html" data-en="Player Stats" data-ne="खेलाडी तथ्यांक">Player Stats</a></li>
+                        <li><a href="membership.html" data-en="Join Us" data-ne="हामीसँग सामेल हुनुहोस्">Join Us</a></li>
+                        <li><a href="contact.html" data-en="Contact" data-ne="सम्पर्क">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Barwa Al Baraha, Qatar</p>
-                    <p><i class="fas fa-clock"></i> Practice: Fri 6:30-7:30 PM</p>
+                    <h3 data-en="Contact" data-ne="सम्पर्क">Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <span data-en="Barwa Al Baraha, Qatar" data-ne="बर्वा अल बराहा, कतार">Barwa Al Baraha, Qatar</span></p>
+                    <p><i class="fas fa-clock"></i> <span data-en="Practice: Fri 6:30-7:30 PM" data-ne="प्रशिक्षण: शुक्रबार ६:३०-७:३० बजे">Practice: Fri 6:30-7:30 PM</span></p>
                     <p><i class="fas fa-envelope"></i> secretary@globalforcefc.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Global Force FC. All rights reserved.</p>
+                <p>&copy; 2025 <span data-en="Global Force FC. All rights reserved." data-ne="ग्लोबल फोर्स एफसी। सर्वाधिकार सुरक्षित।">Global Force FC. All rights reserved.</span></p>
             </div>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const langToggle = document.getElementById('langToggle');
+            const elements = document.querySelectorAll('[data-en][data-ne]');
+            const savedLang = localStorage.getItem('gffc-language') || 'en';
+            setLanguage(savedLang);
+            
+            langToggle.addEventListener('click', function() {
+                const currentLang = localStorage.getItem('gffc-language') || 'en';
+                const newLang = currentLang === 'en' ? 'ne' : 'en';
+                setLanguage(newLang);
+                localStorage.setItem('gffc-language', newLang);
+            });
+            
+            function setLanguage(lang) {
+                elements.forEach(element => {
+                    element.textContent = element.getAttribute('data-' + lang);
+                });
+                const flag = langToggle.querySelector('.flag');
+                if (lang === 'ne') {
+                    flag.textContent = '🇬🇧';
+                    document.body.classList.add('nepali');
+                } else {
+                    flag.textContent = '🇳🇵';
+                    document.body.classList.remove('nepali');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
