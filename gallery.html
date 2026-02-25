@@ -3,166 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Gallery - Global Force FC" data-ne="ग्यालेरी - ग्लोबल फोर्स एफसी">Gallery - Global Force FC</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
-    <base href="/globalforcefc.github.io/">
+    <title>Gallery - Global Force FC</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #16a34a; /* Football green */
+            --accent-gold: #fbbf24;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a1a2e 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .lang-switch {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .lang-switch:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 5%;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+        }
+
+        .gallery-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .gallery-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Filter Buttons */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--secondary);
+            color: var(--text);
+            border: 2px solid transparent;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent);
+            background: transparent;
+            color: var(--accent);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--accent);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent);
+        }
+
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 3rem 5%;
+            margin-top: 5rem;
+            border-top: 2px solid var(--accent);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hide non-active language */
+        .lang-ne { display: none; }
+        body.nepali .lang-en { display: none; }
+        body.nepali .lang-ne { display: block; }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <img src="assets/logo.png" alt="Global Force FC">
-                <span data-en="GLOBAL FORCE FC" data-ne="ग्लोबल फोर्स एफसी">GLOBAL FORCE FC</span>
-            </div>
-            <div class="language-switcher">
-                <button id="langToggle" class="lang-btn">
-                    <span class="flag">🇳🇵</span>
-                    <span class="lang-text" data-en="नेपाली" data-ne="English">नेपाली</span>
-                </button>
-            </div>
-            <div class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" data-en="Home" data-ne="गृहपृष्ठ">Home</a></li>
-                <li><a href="about.html" data-en="About" data-ne="हाम्रो बारेमा">About</a></li>
-                <li><a href="team.html" data-en="Teams" data-ne="टोलीहरू">Teams</a></li>
-                <li><a href="schedule.html" data-en="Schedule" data-ne="तालिका">Schedule</a></li>
-                <li><a href="stats.html" data-en="Statistics" data-ne="तथ्यांक">Statistics</a></li>
-                <li><a href="membership.html" data-en="Membership" data-ne="सदस्यता">Membership</a></li>
-                <li><a href="gallery.html" class="active" data-en="Gallery" data-ne="ग्यालेरी">Gallery</a></li>
-                <li><a href="contact.html" data-en="Contact" data-ne="सम्पर्क">Contact</a></li>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">⚽ Global Force FC</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="lang-en">Home</a><a href="index.html" class="lang-ne">गृहपृष्ठ</a></li>
+                <li><a href="about.html" class="lang-en">About</a><a href="about.html" class="lang-ne">हाम्रोबारे</a></li>
+                <li><a href="team.html" class="lang-en">Team</a><a href="team.html" class="lang-ne">टोली</a></li>
+                <li><a href="gallery.html" class="active lang-en">Gallery</a><a href="gallery.html" class="active lang-ne">ग्यालेरी</a></li>
+                <li><a href="contact.html" class="lang-en">Contact</a><a href="contact.html" class="lang-ne">सम्पर्क</a></li>
+                <li><button class="lang-switch" onclick="toggleLanguage()">EN/नेपाली</button></li>
             </ul>
         </div>
     </nav>
 
-    <section class="page-header">
-        <div class="container">
-            <h1 data-en="Gallery" data-ne="ग्यालेरी">Gallery</h1>
-            <p data-en="Moments & Memories" data-ne="क्षणहरू र सम्झनाहरू">Moments & Memories</p>
+    <main>
+        <div class="gallery-header">
+            <h1 class="lang-en">Our Gallery</h1>
+            <h1 class="lang-ne">हाम्रो ग्यालेरी</h1>
+            <p class="lang-en">Capturing moments of glory, passion, and teamwork</p>
+            <p class="lang-ne">गौरव, जोश र टोलीको कामको क्षणहरू कैद गर्दै</p>
         </div>
-    </section>
 
-    <section class="gallery-section">
-        <div class="container">
-            <div class="gallery-filters">
-                <button class="filter-btn active" data-filter="all" data-en="All" data-ne="सबै">All</button>
-                <button class="filter-btn" data-filter="tournament" data-en="Tournaments" data-ne="प्रतियोगिताहरू">Tournaments</button>
-                <button class="filter-btn" data-filter="friendly" data-en="Friendlies" data-ne="मैत्रीपूर्ण खेलहरू">Friendlies</button>
-                <button class="filter-btn" data-filter="training" data-en="Training" data-ne="प्रशिक्षण">Training</button>
-                <button class="filter-btn" data-filter="events" data-en="Events" data-ne="कार्यक्रमहरू">Events</button>
-            </div>
-
-            <div class="gallery-grid">
-                <div class="gallery-item tournament">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span data-en="Tournament Photo 1" data-ne="प्रतियोगिता फोटो १">Tournament Photo 1</span>
-                    </div>
-                    <div class="gallery-caption" data-en="Tournament 2025" data-ne="प्रतियोगिता २०२५">Tournament 2025</div>
-                </div>
-                <div class="gallery-item friendly">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span data-en="Friendly Match" data-ne="मैत्रीपूर्ण खेल">Friendly Match</span>
-                    </div>
-                    <div class="gallery-caption" data-en="vs Rivals FC" data-ne="बनाम प्रतिद्वन्द्वी एफसी">vs Rivals FC</div>
-                </div>
-                <div class="gallery-item training">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span data-en="Training Session" data-ne="प्रशिक्षण सत्र">Training Session</span>
-                    </div>
-                    <div class="gallery-caption" data-en="Friday Practice" data-ne="शुक्रबार अभ्यास">Friday Practice</div>
-                </div>
-                <div class="gallery-item events">
-                    <div class="placeholder-img">
-                        <i class="fas fa-image"></i>
-                        <span data-en="Club Event" data-ne="क्लब कार्यक्रम">Club Event</span>
-                    </div>
-                    <div class="gallery-caption" data-en="Team Building" data-ne="टोली निर्माण">Team Building</div>
-                </div>
-            </div>
-
-            <div class="social-gallery-note">
-                <h3 data-en="More Photos" data-ne="थप फोटोहरू">More Photos</h3>
-                <p data-en="Follow us on social media for daily updates and photos:" data-ne="दैनिक अद्यावधिक र फोटोहरूका लागि सामाजिक सञ्जालमा हामीलाई फलो गर्नुहोस्:">Follow us on social media for daily updates and photos:</p>
-                <div class="social-big">
-                    <a href="https://facebook.com/YOUR_PAGE" target="_blank" class="social-btn facebook">
-                        <i class="fab fa-facebook"></i> Facebook
-                    </a>
-                    <a href="https://tiktok.com/YOUR_ACCOUNT" target="_blank" class="social-btn tiktok">
-                        <i class="fab fa-tiktok"></i> TikTok
-                    </a>
-                </div>
-            </div>
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGallery('all')">
+                <span class="lang-en">All</span>
+                <span class="lang-ne">सबै</span>
+            </button>
+            <button class="filter-btn" onclick="filterGallery('matches')">
+                <span class="lang-en">Matches</span>
+                <span class="lang-ne">खेलहरू</span>
+            </button>
+            <button class="filter-btn" onclick="filterGallery('training')">
+                <span class="lang-en">Training</span>
+                <span class="lang-ne">तालिम</span>
+            </button>
+            <button class="filter-btn" onclick="filterGallery('team')">
+                <span class="lang-en">Team</span>
+                <span class="lang-ne">टोली</span>
+            </button>
         </div>
-    </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 data-en="Global Force FC" data-ne="ग्लोबल फोर्स एफसी">Global Force FC</h3>
-                    <p><span data-en="Strength in Unity" data-ne="एकतामा शक्ति">Strength in Unity</span><br>2025</p>
-                    <div class="social-links">
-                        <a href="https://facebook.com/YOUR_PAGE" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://tiktok.com/YOUR_ACCOUNT" target="_blank"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://wa.me/974XXXXXXXX" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3 data-en="Quick Links" data-ne="द्रुत लिङ्कहरू">Quick Links</h3>
-                    <ul>
-                        <li><a href="schedule.html" data-en="Fixtures" data-ne="खेल तालिका">Fixtures</a></li>
-                        <li><a href="stats.html" data-en="Player Stats" data-ne="खेलाडी तथ्यांक">Player Stats</a></li>
-                        <li><a href="membership.html" data-en="Join Us" data-ne="हामीसँग सामेल हुनुहोस्">Join Us</a></li>
-                        <li><a href="contact.html" data-en="Contact" data-ne="सम्पर्क">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3 data-en="Contact" data-ne="सम्पर्क">Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> <span data-en="Barwa Al Baraha, Qatar" data-ne="बर्वा अल बराहा, कतार">Barwa Al Baraha, Qatar</span></p>
-                    <p><i class="fas fa-clock"></i> <span data-en="Practice: Fri 6:30-7:30 PM" data-ne="प्रशिक्षण: शुक्रबार ६:३०-७:३० बजे">Practice: Fri 6:30-7:30 PM</span></p>
-                    <p><i class="fas fa-envelope"></i> secretary@globalforcefc.com</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 <span data-en="Global Force FC. All rights reserved." data-ne="ग्लोबल फोर्स एफसी। सर्वाधिकार सुरक्षित।">Global Force FC. All rights reserved.</span></p>
-            </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery items will be populated by JavaScript -->
         </div>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">📘</a>
+            <a href="#">📸</a>
+            <a href="#">🐦</a>
+            <a href="#">▶️</a>
+        </div>
+        <p class="lang-en">&copy; 2025 Global Force FC. All rights reserved.</p>
+        <p class="lang-ne">&copy; २०२५ ग्लोबल फोर्स एफसी। सर्वाधिकार सुरक्षित।</p>
     </footer>
 
-    <script src="js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const langToggle = document.getElementById('langToggle');
-            const elements = document.querySelectorAll('[data-en][data-ne]');
-            const savedLang = localStorage.getItem('gffc-language') || 'en';
-            setLanguage(savedLang);
+        // Gallery Data
+        const galleryData = [
+            { id: 1, category: 'matches', src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800', title: 'Championship Final', titleNe: 'च्याम्पियनसी फाइनल' },
+            { id: 2, category: 'training', src: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800', title: 'Morning Practice', titleNe: 'बिहानको अभ्यास' },
+            { id: 3, category: 'team', src: 'https://images.unsplash.com/photo-1522778119026-d647f0565c6a?w=800', title: 'Team Building 2024', titleNe: 'टोली निर्माण २०२४' },
+            { id: 4, category: 'matches', src: 'https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=800', title: 'Victory Celebration', titleNe: 'जीत उत्सव' },
+            { id: 5, category: 'training', src: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800', title: 'Youth Academy', titleNe: 'युवा एकेडेमी' },
+            { id: 6, category: 'team', src: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=800', title: 'Squad Photo', titleNe: 'टोली तस्बिर' }
+        ];
+
+        let currentImageIndex = 0;
+        let currentFilter = 'all';
+
+        // Initialize Gallery
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = '';
             
-            langToggle.addEventListener('click', function() {
-                const currentLang = localStorage.getItem('gffc-language') || 'en';
-                const newLang = currentLang === 'en' ? 'ne' : 'en';
-                setLanguage(newLang);
-                localStorage.setItem('gffc-language', newLang);
+            const filtered = currentFilter === 'all' 
+                ? galleryData 
+                : galleryData.filter(item => item.category === currentFilter);
+
+            filtered.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.onclick = () => openLightbox(index);
+                div.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3 class="lang-en">${item.title}</h3>
+                        <h3 class="lang-ne">${item.titleNe}</h3>
+                    </div>
+                `;
+                grid.appendChild(div);
             });
-            
-            function setLanguage(lang) {
-                elements.forEach(element => {
-                    element.textContent = element.getAttribute('data-' + lang);
-                });
-                const flag = langToggle.querySelector('.flag');
-                if (lang === 'ne') {
-                    flag.textContent = '🇬🇧';
-                    document.body.classList.add('nepali');
-                } else {
-                    flag.textContent = '🇳🇵';
-                    document.body.classList.remove('nepali');
+        }
+
+        function filterGallery(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.textContent.toLowerCase().includes(category) || 
+                   (category === 'all' && btn.textContent.includes('All'))) {
+                    btn.classList.add('active');
                 }
-            }
+            });
+            renderGallery();
+        }
+
+        // Lightbox Functions
+        function openLightbox(index) {
+            const filtered = currentFilter === 'all' 
+                ? galleryData 
+                : galleryData.filter(item => item.category === currentFilter);
+            currentImageIndex = index;
+            document.getElementById('lightboxImg').src = filtered[index].src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeImage(direction) {
+            const filtered = currentFilter === 'all' 
+                ? galleryData 
+                : galleryData.filter(item => item.category === currentFilter);
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = filtered.length - 1;
+            if (currentImageIndex >= filtered.length) currentImageIndex = 0;
+            document.getElementById('lightboxImg').src = filtered[currentImageIndex].src;
+        }
+
+        // Language Toggle
+        function toggleLanguage() {
+            document.body.classList.toggle('nepali');
+            localStorage.setItem('language', document.body.classList.contains('nepali') ? 'ne' : 'en');
+        }
+
+        // Check saved language
+        if (localStorage.getItem('language') === 'ne') {
+            document.body.classList.add('nepali');
+        }
+
+        // Initialize
+        renderGallery();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
         });
     </script>
 </body>
