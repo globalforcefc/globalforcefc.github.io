@@ -1219,3 +1219,80 @@ body {
         transform: none;
     }
 }
+
+/* ============================================ */
+/* LANGUAGE SWITCHER STYLES - ADDED FOR BILINGUAL */
+/* ============================================ */
+
+.language-switcher {
+    margin-right: 20px;
+}
+
+.lang-btn {
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid var(--gold);
+    color: var(--white);
+    padding: 8px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.lang-btn:hover {
+    background: var(--gold);
+    color: var(--primary-navy);
+}
+
+.flag {
+    font-size: 1.2rem;
+}
+
+/* Nepali Font Support */
+body.nepali {
+    font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.nepali h1,
+body.nepali h2,
+body.nepali h3,
+body.nepali h4,
+body.nepali h5,
+body.nepali h6 {
+    font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+body.nepali p,
+body.nepali span,
+body.nepali a,
+body.nepali li,
+body.nepali label,
+body.nepali button {
+    font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Responsive adjustments for language switcher */
+@media (max-width: 768px) {
+    .language-switcher {
+        order: 2;
+        margin-right: 10px;
+    }
+    
+    .lang-text {
+        display: none;
+    }
+    
+    .lang-btn {
+        padding: 8px;
+    }
+}
+
+/* Ensure proper text rendering for Nepali */
+[lang="ne"] {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
